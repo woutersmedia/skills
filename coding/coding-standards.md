@@ -1,11 +1,11 @@
 ---
 name: coding-standards
-description: Booker project coding standards - TypeScript strict typing, export const components, no FC, no React namespace, component/container separation, server-side first, localization requirements, Heading/Paragraph components. Avoid useEffect — prefer useMemo for derived values and server components for data fetching.
+description: Wouters Media coding standards - TypeScript strict typing, export const components, no FC, no React namespace, component/container separation, server-side first, localization requirements, Heading/Paragraph components. Avoid useEffect — prefer useMemo for derived values and server components for data fetching.
 ---
 
-# Booker Coding Standards
+# Wouters Media Coding Standards
 
-Apply these rules whenever writing or reviewing code in the Booker project.
+Apply these rules whenever writing or reviewing code in Wouters Media projects.
 
 ## TypeScript Strict Typing
 
@@ -149,7 +149,7 @@ The `useDictionary()` hook reads from the `DictionaryProvider` context, which is
 
 ```typescript
 // ❌ FORBIDDEN
-<h1>Welcome to Booker</h1>
+<h1>Welcome</h1>
 
 // ✅ CORRECT — useDictionary() reads language from DictionaryProvider context
 import { useDictionary } from "@/providers/Dictionary";

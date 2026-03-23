@@ -66,6 +66,6 @@ export const Button = ({ children }: ButtonProps) => { ... };
 
 ## Avoid `useEffect`
 
-Prefer `useMemo` for derived values and server components for data fetching. See the Booker coding standards for detailed examples.
+Prefer `useMemo` for derived values and server components for data fetching. See `coding-standards.md` for detailed examples.
 
 Only use `useEffect` for genuine external-system synchronisation (WebSockets, imperative DOM APIs, third-party SDK initialisation). Always include a cleanup function.

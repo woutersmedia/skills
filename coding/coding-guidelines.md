@@ -1,15 +1,15 @@
 ---
-name: cimi-coding-guidelines
-description: Project-specific coding standards for the CIMI codebase. Use when writing or reviewing code in this repo. CRITICAL never create, suggest, or mention middleware.ts—it is forbidden; routing uses apps/cimi/proxy.ts only. CRITICAL all user-visible labels must use the i18n system (never hardcode Dutch or any language); all code must be written in English. Covers React/TypeScript style, DRY, tests, typography/buttons/styling, Prisma, component architecture (components vs containers), and API calls with absolute URLs. Triggers on tasks involving components, API routes, Prisma, tests, or CODING_GUIDELINES.
+name: coding-guidelines
+description: Wouters Media coding standards. Use when writing or reviewing code in any project. CRITICAL never create, suggest, or mention middleware.ts—it is forbidden; routing uses apps/proxy.ts only. CRITICAL all user-visible labels must use the i18n system (never hardcode Dutch or any language); all code must be written in English. Covers React/TypeScript style, DRY, tests, typography/buttons/styling, Prisma, component architecture (components vs containers), and API calls with absolute URLs. Triggers on tasks involving components, API routes, Prisma, tests, or CODING_GUIDELINES.
 ---
 
-# CIMI Coding Guidelines
+# Coding Guidelines
 
 Project best practices from CODING_GUIDELINES. Apply when writing or reviewing code in this repository.
 
 ## Critical: middleware.ts is forbidden
 
-**Never create, suggest, or mention `middleware.ts`.** Routing and auth use `apps/cimi/proxy.ts` only. Do not rename, move, or refactor that file. If Next.js complains about missing middleware, do not add middleware.ts—the user will handle it. See `rules/middleware-prohibition.md`.
+**Never create, suggest, or mention `middleware.ts`.** Routing and auth use `apps/proxy.ts` only. Do not rename, move, or refactor that file. If Next.js complains about missing middleware, do not add middleware.ts—the user will handle it. See `rules/middleware-prohibition.md`.
 
 ## Critical: all labels must be multilingual — no hardcoded language text
 

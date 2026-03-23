@@ -16,12 +16,12 @@ Always add new keys to **both** `en.json` and `nl.json` simultaneously.
 
 ```typescript
 // Hardcoded Dutch
-<h1>Welkom bij CIMI</h1>
+<h1>Welkom</h1>
 <button>Opslaan</button>
 <nav label="Navigatie" />
 
 // Hardcoded English (still forbidden for UI text)
-<h1>Welcome to CIMI</h1>
+<h1>Welcome</h1>
 ```
 
 ```typescript
@@ -54,10 +54,10 @@ export const SaveButton = () => {
 
 ```json
 // en.json
-{ "common": { "welcome": "Welcome to CIMI", "save": "Save" } }
+{ "common": { "welcome": "Welcome", "save": "Save" } }
 
 // nl.json
-{ "common": { "welcome": "Welkom bij CIMI", "save": "Opslaan" } }
+{ "common": { "welcome": "Welkom", "save": "Opslaan" } }
 ```
 
 ## Navigation Labels

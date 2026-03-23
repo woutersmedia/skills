@@ -4,7 +4,7 @@
 
 **Never create, suggest, or mention `middleware.ts`.**
 
-Routing and authentication in this project are handled exclusively by `apps/cimi/proxy.ts`. This file must not be renamed, moved, or refactored.
+Routing and authentication in this project are handled exclusively by `apps/proxy.ts`. This file must not be renamed, moved, or refactored.
 
 ## Why
 
@@ -12,9 +12,9 @@ Next.js `middleware.ts` conflicts with the existing proxy-based routing architec
 
 ## What to Do Instead
 
-- Route protection → handled in `apps/cimi/proxy.ts`
-- Auth checks → handled in `apps/cimi/proxy.ts`
-- Locale detection → handled in `apps/cimi/proxy.ts`
+- Route protection → handled in `apps/proxy.ts`
+- Auth checks → handled in `apps/proxy.ts`
+- Locale detection → handled in `apps/proxy.ts`
 
 If Next.js warns about missing middleware, **do not** create `middleware.ts`. Inform the user that routing is intentionally managed via the proxy, and they will handle any Next.js configuration if needed.
 
@@ -22,7 +22,7 @@ If Next.js warns about missing middleware, **do not** create `middleware.ts`. In
 
 ```typescript
 // NEVER create this file
-// apps/cimi/middleware.ts
+// apps/middleware.ts
 import { NextResponse } from "next/server";
 export function middleware(request: Request) { ... }
 ```
@@ -31,5 +31,5 @@ export function middleware(request: Request) { ... }
 
 ```typescript
 // All routing/auth logic lives here — do not touch
-// apps/cimi/proxy.ts
+// apps/proxy.ts
 ```
