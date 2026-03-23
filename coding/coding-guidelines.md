@@ -1,71 +1,39 @@
 ---
 name: coding-guidelines
-description: Wouters Media coding standards. Use when writing or reviewing code in any project. CRITICAL never create, suggest, or mention middleware.ts—it is forbidden; routing uses apps/proxy.ts only. CRITICAL all user-visible labels must use the i18n system (never hardcode Dutch or any language); all code must be written in English. Covers React/TypeScript style, DRY, tests, typography/buttons/styling, Prisma, component architecture (components vs containers), and API calls with absolute URLs. Triggers on tasks involving components, API routes, Prisma, tests, or CODING_GUIDELINES.
+description: Wouters Media coding standards index. Use when writing or reviewing code in any project. Points to individual rule files for React/TypeScript style, DRY, tests, styling, database, component architecture, and i18n. Triggers on tasks involving components, API routes, database, tests, or general project standards.
 ---
 
 # Coding Guidelines
 
-Project best practices from CODING_GUIDELINES. Apply when writing or reviewing code in this repository.
+Index of Wouters Media coding rules. Each rule is defined once in its own file — read the relevant file for details and examples.
 
-## Critical: middleware.ts is forbidden
+## Core Standards
 
-**Never create, suggest, or mention `middleware.ts`.** Routing and auth use `apps/proxy.ts` only. Do not rename, move, or refactor that file. If Next.js complains about missing middleware, do not add middleware.ts—the user will handle it. See `rules/middleware-prohibition.md`.
+| Rule file                         | Description                                                   |
+| --------------------------------- | ------------------------------------------------------------- |
+| `coding-standards.md`             | TypeScript strict typing, exports, React imports, file naming |
+| `rules/general.md`                | Naming conventions, error handling, file size limits          |
+| `rules/dry.md`                    | DRY principles, avoiding duplication                          |
+| `rules/use-effect.md`             | When to avoid `useEffect` and what to use instead             |
+| `rules/component-architecture.md` | `components/` vs `containers/` vs `app/` separation          |
+| `rules/testing.md`                | Test conventions with React Testing Library                   |
+| `rules/styling.md`                | Tailwind-only styling, design tokens                          |
+| `rules/database-schema.md`        | ORM conventions, schema naming, typed queries                 |
 
-## Critical: all labels must be multilingual — no hardcoded language text
+## i18n & Middleware
 
-**Never hardcode Dutch (or any language) text in components, containers, navigation labels, or module definitions.** All user-visible strings must use the i18n translation system via `getTranslation(locale, key)`. All code (variable names, comments, error messages) must be written in **English**. See `rules/multilingual-labels.md`.
+| Rule file                        | Description                                       |
+| -------------------------------- | ------------------------------------------------- |
+| `rules/multilingual-labels.md`   | No hardcoded language text — all strings via i18n |
+| `rules/middleware-prohibition.md`| Never create `middleware.ts` — use `proxy.ts`     |
 
-## When to Apply
+## Optional / Project-Specific
 
-- Writing or refactoring React/TypeScript components
-- Adding or changing API routes or client fetch calls
-- Modifying Prisma schema or database code
-- Adding tests or reviewing coverage
-- Working with typography, buttons, links, or styling
-- Organizing components vs containers or app folder structure
-- Ensuring copy and tone match brand (community-first, inclusive)
+These rules apply when the project uses the relevant technology or pattern:
 
-## Rule Categories
+| Rule file                   | Description                                             |
+| --------------------------- | ------------------------------------------------------- |
+| `optional/typography.md`    | `<Heading>` and `<Paragraph>` component usage           |
+| `optional/buttons-links.md` | `<Button>` and `<AppLink>` component usage              |
+| `optional/locale.md`        | Locale-prefixed routes and absolute API URLs            |
 
-| Category               | Impact   | Rule file                |
-| ---------------------- | -------- | ------------------------ |
-| Middleware prohibition | CRITICAL | `middleware-prohibition` |
-| General style          | HIGH     | `general`                |
-| DRY                    | HIGH     | `dry`                    |
-| Testing                | HIGH     | `testing`                |
-| Typography             | HIGH     | `typography`             |
-| Buttons & links        | HIGH     | `buttons-links`          |
-| Styling                | HIGH     | `styling`                |
-| Database (Prisma)      | HIGH     | `database-schema`        |
-| Component architecture | HIGH     | `component-architecture` |
-| API & locale           | CRITICAL | `api-locale-prefixes`    |
-
-## Quick Reference
-
-- **React**: No `React.` prefix; import types explicitly. No `any`. Functional components, clear names. Files < 100 lines.
-- **UI**: Use `<Heading>` / `<Paragraph>` from Typography; `<Button>` from Button. No raw `<h1>`–`<h6>`, `<p>`, `<button>`, `<a>`, or next/link `<Link>`.
-- **Styling**: Tailwind only; no inline `style` prop (exceptions in listed UI files only).
-- **Structure**: Presentation in `/components`, logic/API in `/containers`. No components in `app` (except page/layout/error/loading/not-found).
-- **API**: Always absolute URLs for fetch: `new URL('/api/...', window.location.origin).toString()`.
-- **Prisma**: After editing schema, run `npx prisma generate` (or `cd packages/db && npm run generate`).
-- **i18n**: All user-visible text via `t(key)`. Add keys to both `en.json` and `nl.json`. Navigation labels use dot-notation keys. Code always in English.
-
-## How to Use
-
-Read the relevant rule file for details and examples:
-
-```
-rules/middleware-prohibition.md
-rules/multilingual-labels.md
-rules/general.md
-rules/dry.md
-rules/testing.md
-rules/typography.md
-rules/buttons-links.md
-rules/styling.md
-rules/database-schema.md
-rules/component-architecture.md
-rules/api-locale-prefixes.md
-```
-
-For the full project document, see repository root: `CODING_GUIDELINES.md`.

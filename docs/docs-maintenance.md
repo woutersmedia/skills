@@ -1,53 +1,52 @@
 ---
 name: docs-maintenance
 description: >
-  Automates maintenance of the Nextra documentation app (apps/docs).
+  Automates maintenance of the documentation app (apps/docs).
   Use when asked to update docs, add a new API endpoint to the docs, sync SDK
-  types with the documentation, regenerate _meta.json, or add a new doc page.
+  types with the documentation, regenerate navigation metadata, or add a new doc page.
   Triggers on tasks mentioning "update docs", "add endpoint to docs", "sync
-  docs with SDK", "new doc page", or "regenerate _meta".
+  docs with SDK", "new doc page", or "regenerate navigation".
 ---
 
 # Docs Maintenance
 
 ## Overview
 
-The documentation lives in **`apps/docs`** — a standalone Next.js + Nextra 4.x app that is
-served at `/docs` on the main domain (e.g. `example.co.nl/docs`) via a reverse-proxy rewrite in
-`apps/web/next.config.ts`.
+The documentation lives in **`apps/docs`** — a standalone Next.js documentation app served at `/docs` on the main domain via a reverse-proxy rewrite in `apps/web/next.config.ts`.
 
-The documentation is **automatically kept in sync** with the SDK surface through two mechanisms:
+**Recommended framework: [Nextra](https://nextra.site/) 4.x** — a Next.js-based docs framework with MDX support, sidebar navigation, and built-in search. Other documentation tools (Docusaurus, Mintlify, plain Next.js with MDX) are acceptable if the project has already adopted them. Check `apps/docs/package.json` to see what is in use.
 
-1. **`generateDocsMeta` utility** (`packages/docs/src/index.ts`) — regenerates `_meta.json`
-   from a canonical list of pages without manual editing.
-2. **This skill** — provides step-by-step instructions for keeping MDX content in sync with
-   SDK and API changes.
+The documentation is kept in sync with the SDK surface through:
+
+1. **Navigation metadata** (`_meta.json` in Nextra, or equivalent) — maps file names to sidebar labels.
+2. **This skill** — provides step-by-step instructions for keeping content in sync with SDK and API changes.
 
 ---
 
-## File Locations
+## File Locations (Nextra default layout)
 
 | Purpose                            | Path                                                     |
 | ---------------------------------- | -------------------------------------------------------- |
 | All documentation MDX pages        | `apps/docs/content/*.mdx`                                |
 | Sidebar navigation metadata        | `apps/docs/content/_meta.json`                           |
 | Nextra config (Next.js wrapper)    | `apps/docs/next.config.ts`                               |
-| Root layout (fonts, Nextra Layout) | `apps/docs/app/layout.tsx`                               |
+| Root layout                        | `apps/docs/app/layout.tsx`                               |
 | MDX catch-all page renderer        | `apps/docs/app/[[...mdxPath]]/page.tsx`                  |
 | Global CSS + color theme           | `apps/docs/app/globals.css`                              |
-| Docs config helper                 | `packages/docs/src/index.ts`                             |
-| Canonical page list constant       | `packages/docs/src/index.ts` → `DOCS_DEFAULT_PAGES`      |
+
+> If the project uses a different docs framework, adapt these paths accordingly.
 
 ---
 
 ## Running the Docs App Locally
 
 ```bash
-# Start the docs app alone (port 3001)
-pnpm --filter docs dev
+# Preferred: pnpm (used in Wouters Media projects)
+pnpm --filter docs dev        # docs only, port 3001
+pnpm dev                      # everything together
 
-# Start everything together — web at :3000, docs at :3001
-pnpm dev
+# npm also works
+npm run dev --workspace=apps/docs
 ```
 
 ---
@@ -60,11 +59,11 @@ pnpm dev
 # Create apps/docs/content/<page-key>.mdx
 ```
 
-Use `apps/docs/content/authentication.mdx` as a reference template for API endpoint pages.
+Use an existing content file as a reference template.
 
-### 2. Register the page in `_meta.json`
+### 2. Register the page in the navigation metadata
 
-Either edit `apps/docs/content/_meta.json` directly:
+For Nextra, edit `apps/docs/content/_meta.json`:
 
 ```json
 {
@@ -73,7 +72,7 @@ Either edit `apps/docs/content/_meta.json` directly:
 }
 ```
 
-Or regenerate it programmatically using `generateDocsMeta` from the docs package:
+If the project uses a `generateDocsMeta` utility, use that instead:
 
 ```ts
 import { generateDocsMeta, DOCS_DEFAULT_PAGES } from '@your-org/docs';
@@ -82,12 +81,11 @@ const meta = generateDocsMeta([
   ...DOCS_DEFAULT_PAGES,
   { key: 'my-new-page', label: 'My New Page' },
 ]);
-// write JSON.stringify(meta, null, 2) to apps/docs/content/_meta.json
 ```
 
-### 3. Update `DOCS_DEFAULT_PAGES` in `packages/docs/src/index.ts`
+### 3. Update the canonical page list
 
-Add the new entry to keep the canonical page list in sync:
+If the project maintains a `DOCS_DEFAULT_PAGES` constant, add the new entry:
 
 ```ts
 export const DOCS_DEFAULT_PAGES: DocsMetaEntry[] = [
@@ -102,24 +100,13 @@ export const DOCS_DEFAULT_PAGES: DocsMetaEntry[] = [
 
 When new types, endpoints, or methods are added to `packages/sdk/src/`:
 
-1. **Identify the affected doc page** — each SDK method maps to a content file:
-   - `getApps` / `getApp` → `apps/docs/content/apps.mdx`
-   - `getContent` / `getContentItem` → `apps/docs/content/content.mdx`
-   - `getProducts` / `getProduct` → `apps/docs/content/products.mdx`
-   - `getPages` / `getPage` → `apps/docs/content/pages.mdx`
-   - `getContentTypes` / `getContentTypeFields` → `apps/docs/content/content.mdx`
-
-2. **Update the MDX page** with new endpoint docs, request/response examples, and
-   any changed query parameters.
-
-3. **If a new top-level resource is added**, create a new MDX page and register it
-   (follow steps in "Adding a New Documentation Page").
+1. **Identify the affected doc page** — each SDK method typically maps to one content file.
+2. **Update the MDX page** with new endpoint docs, request/response examples, and any changed query parameters.
+3. **If a new top-level resource is added**, create a new MDX page and register it in the navigation metadata.
 
 ---
 
-## Styling Guidelines
-
-The docs app uses brand colors applied to Nextra's CSS variables:
+## Styling Guidelines (Nextra)
 
 ```css
 /* In apps/docs/app/globals.css */
@@ -130,18 +117,19 @@ The docs app uses brand colors applied to Nextra's CSS variables:
 }
 ```
 
-To change the accent color, update those three `--nextra-primary-*` variables only.
-Do **not** add inline styles or override Nextra's utility classes directly.
+To change the accent color, update those three `--nextra-primary-*` variables only. Do **not** add inline styles or override Nextra's utility classes directly.
+
+For other documentation frameworks, follow the equivalent theming approach documented by that framework.
 
 ---
 
 ## Deployment
 
-The docs app is a separate Next.js deployment. In production, set the `DOCS_URL` environment
-variable in the main web app to point to the deployed docs URL:
+The docs app is a separate Next.js deployment. Set the `DOCS_URL` environment variable in the main web app to point to the deployed docs URL:
 
 ```
 DOCS_URL=https://docs.example.co.nl
 ```
 
-The `apps/web/next.config.ts` rewrite rule will forward all `/docs` traffic to `DOCS_URL`.
+The `apps/web/next.config.ts` rewrite rule forwards all `/docs` traffic to `DOCS_URL`.
+

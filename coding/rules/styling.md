@@ -34,14 +34,16 @@ Inline `style` is allowed **only** in the following UI primitive files where dyn
 
 ## Design Tokens
 
-Always use design-token classes (`text-primary`, `bg-background`, `border-border`, etc.) instead of raw color classes. This ensures theme switching works correctly.
+Prefer design-token classes (`text-primary`, `bg-background`, `border-border`, etc.) over raw color values when the project has a design system with defined tokens. This ensures theme switching works correctly.
+
+If no matching token exists for the value you need, fall back to standard Tailwind color classes.
 
 ```typescript
-// ❌ AVOID — hardcoded color
-<p className="text-gray-500">Hint text</p>
-
-// ✅ CORRECT — design token
+// ✅ PREFERRED — design token where one exists
 <p className="text-muted-foreground">Hint text</p>
+
+// ✅ ACCEPTABLE — fallback to Tailwind when no token covers this case
+<p className="text-gray-500">Hint text</p>
 ```
 
 ## Responsive Design

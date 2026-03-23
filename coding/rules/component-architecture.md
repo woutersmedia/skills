@@ -47,10 +47,10 @@ Containers are **smart orchestrators**. They:
 
 ```typescript
 // ✅ CORRECT — server container fetches data and passes to component
-export default async function UserProfileContainer({ userId }: { userId: string }) {
+export const UserProfileContainer = async ({ userId }: { userId: string }) => {
   const user = await getUser(userId);
   return <UserCard name={user.name} email={user.email} avatarUrl={user.avatarUrl} />;
-}
+};
 ```
 
 ## App Directory (`/app`)

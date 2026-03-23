@@ -61,6 +61,10 @@ Available `ParagraphTypes`:
 
 ## Enforcement
 
-- Bare `<h1>`–`<h6>` tags are **forbidden** everywhere except inside `components/ui/heading.tsx`.
-- Bare `<p>` tags with typography `className` are **forbidden** everywhere except inside `components/ui/paragraph.tsx`.
+When a project provides `<Heading>` and `<Paragraph>` components, prefer them over bare HTML tags and typography `className` combinations. The specific constraints below apply to projects that adopt this system:
+
+- Bare `<h1>`–`<h6>` tags should be avoided in favour of the `<Heading>` component.
+- Bare `<p>` tags with typography `className` should be avoided in favour of `<Paragraph>`.
 - Do **not** use `className` on `<Heading>` / `<Paragraph>` to recreate a variant that already exists.
+
+> **Note:** If the project does not use these components, use semantic HTML with Tailwind classes directly. Check the project's `components/ui/` directory to confirm what is available.
