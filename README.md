@@ -2,38 +2,44 @@
 
 Wouters Media AI agent skills, organised by category. These skills apply to all AI agents (GitHub Copilot, Claude, Cursor, etc.), not just Copilot.
 
+## Install
+
+```bash
+npx skills add woutersmedia/skills
+```
+
 ## 📁 Structure
 
 ```
-coding/                            # React / TypeScript / Next.js standards
-  coding-standards.md              # Core standards: strict typing, exports, imports, server-first
-  coding-guidelines.md             # Index: links to all rule files
-  rules/
-    general.md                     # TypeScript & React style basics, naming, error handling
-    dry.md                         # DRY principles and avoiding duplication
-    testing.md                     # Testing practices with React Testing Library
-    use-effect.md                  # When and how to avoid useEffect
-    styling.md                     # Tailwind-only styling rules
-    database-schema.md             # ORM conventions, typed queries (Prisma recommended)
-    component-architecture.md      # components/ vs containers/ vs app/ separation
-    middleware-prohibition.md      # Never use middleware.ts — use proxy.ts
-    multilingual-labels.md         # i18n: no hardcoded language text in UI
+skills/                            # Installable skills (npx skills add woutersmedia/skills)
+  coding-standards/SKILL.md        # Core standards: strict typing, exports, imports, server-first
+  coding-guidelines/SKILL.md       # Comprehensive guide: all rules inline (React, DRY, tests, i18n, etc.)
+  web-design-guidelines/SKILL.md   # UI review against Vercel Web Interface Guidelines
+  docs-maintenance/SKILL.md        # Docs app: adding pages, syncing SDK (Nextra recommended)
+  package-manager/SKILL.md         # pnpm preference, monorepo workspace commands
+  github-actions/SKILL.md          # GitHub Actions optimisation: caching, DRY workflows, KISS
+  turbopack/SKILL.md               # Turbopack / Turborepo: caching, task pipelines, optimisation
+  typography/SKILL.md              # Optional: <Heading> and <Paragraph> component usage
+  buttons-links/SKILL.md           # Optional: <Button> and <AppLink> component usage
+  locale/SKILL.md                  # Optional: locale-prefixed routes and absolute API URLs
 
-optional/                          # Project-specific / nice-to-have rules
-  typography.md                    # <Heading> and <Paragraph> component usage
-  buttons-links.md                 # <Button> and <AppLink> component usage
-  locale.md                        # Locale-prefixed routes and absolute API URLs
+coding/                            # Source documentation
+  coding-standards.md
+  coding-guidelines.md
+  rules/                           # Individual rule files referenced by coding-guidelines
+
+optional/                          # Source documentation for optional/project-specific rules
 
 docs/
-  docs-maintenance.md              # Docs app: adding pages, syncing SDK (Nextra recommended)
+  docs-maintenance.md
 
 design/
-  web-design-guidelines.md         # UI review against Vercel Web Interface Guidelines
+  web-design-guidelines.md
 
 tooling/
-  package-manager.md               # pnpm preference, monorepo workspace commands
-  github-actions.md                # GitHub Actions optimisation: caching, DRY workflows, KISS
-  turbopack.md                     # Turbopack / Turborepo: caching, task pipelines, optimisation
+  package-manager.md
+  github-actions.md
+  turbopack.md
 ```
 
 ## 🚀 Skills at a Glance
@@ -41,10 +47,21 @@ tooling/
 | Skill | Category | Description |
 |-------|----------|-------------|
 | `coding-standards` | Coding | Core TypeScript/React rules, exports, file naming |
-| `coding-guidelines` | Coding | Index of all rule files |
-| `docs-maintenance` | Docs | Adding/updating doc pages and syncing SDK types |
+| `coding-guidelines` | Coding | Comprehensive guide: all rules inline (DRY, tests, styling, DB, i18n, middleware) |
 | `web-design-guidelines` | Design | Accessibility & UX audit against Vercel guidelines |
+| `docs-maintenance` | Docs | Adding/updating doc pages and syncing SDK types |
 | `package-manager` | Tooling | pnpm preference and monorepo workspace commands |
 | `github-actions` | Tooling | GitHub Actions optimisation: caching, DRY, KISS, fewer build minutes |
 | `turbopack` | Tooling | Turbopack / Turborepo caching, task pipelines, and build optimisation |
+| `typography` | Optional | `<Heading>` and `<Paragraph>` component usage (project-specific) |
+| `buttons-links` | Optional | `<Button>` and `<AppLink>` component usage (project-specific) |
+| `locale` | Optional | Locale-prefixed routes and absolute API URLs (project-specific) |
+
+Optional skills are hidden by default. Install them explicitly when the project uses that component system:
+
+```bash
+INSTALL_INTERNAL_SKILLS=1 npx skills add woutersmedia/skills --skill typography
+INSTALL_INTERNAL_SKILLS=1 npx skills add woutersmedia/skills --skill buttons-links
+INSTALL_INTERNAL_SKILLS=1 npx skills add woutersmedia/skills --skill locale
+```
 
