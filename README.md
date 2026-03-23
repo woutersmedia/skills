@@ -1,6 +1,6 @@
 # skills
 
-Wouters Media GitHub Copilot skills, organised by category.
+Wouters Media AI agent skills, organised by category. These skills apply to all AI agents (GitHub Copilot, Claude, Cursor, etc.), not just Copilot.
 
 ## 📁 Structure
 
@@ -32,6 +32,8 @@ design/
 
 tooling/
   package-manager.md               # pnpm preference, monorepo workspace commands
+  github-actions.md                # GitHub Actions optimisation: caching, DRY workflows, KISS
+  turbopack.md                     # Turbopack / Turborepo: caching, task pipelines, optimisation
 ```
 
 ## 🚀 Skills at a Glance
@@ -43,4 +45,6 @@ tooling/
 | `docs-maintenance` | Docs | Adding/updating doc pages and syncing SDK types |
 | `web-design-guidelines` | Design | Accessibility & UX audit against Vercel guidelines |
 | `package-manager` | Tooling | pnpm preference and monorepo workspace commands |
+| `github-actions` | Tooling | GitHub Actions optimisation: caching, DRY, KISS, fewer build minutes |
+| `turbopack` | Tooling | Turbopack / Turborepo caching, task pipelines, and build optimisation |
 
